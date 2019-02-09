@@ -13,7 +13,7 @@ char inputChar()
 char *inputString()
 {
     // TODO: rewrite this function
-  char randomString[6];
+  char *randomString = (char*) malloc(sizeof(char) * 6);
   int i = 0;
 
   for(i = 0; i < 5; i++)
