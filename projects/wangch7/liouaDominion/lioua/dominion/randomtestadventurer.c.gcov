@@ -1,0 +1,124 @@
+        -:    0:Source:randomtestadventurer.c
+        -:    0:Graph:randomtestadventurer.gcno
+        -:    0:Data:randomtestadventurer.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/*******************************************************************************************
+        -:    2:** randomtestadventurer.c
+        -:    3:** This card test is designed to test card Adventurer.
+        -:    4:** Adventurer - Reveal cards from player's deck until reveal 2 Treasure cards.
+        -:    5:**				Put those Treasure cards into player's hand and discard the other
+        -:    6:**				revealed cards.
+        -:    7:**
+        -:    8:** Include the following lines in makefile:
+        -:    9:** randomtestadventurer: randomtestadventurer.c dominion.o rngs.o
+        -:   10:**      gcc -o randomtestadventurer -g  randomtestadventurer.c dominion.o rngs.o $(CFLAGS)
+        -:   11:*******************************************************************************************/
+        -:   12:
+        -:   13:#include "dominion.h"
+        -:   14:#include "dominion_helpers.h"
+        -:   15:#include <string.h>
+        -:   16:#include <stdio.h>
+        -:   17:#include <assert.h>
+        -:   18:#include "rngs.h"
+        -:   19:#include <stdlib.h>
+        -:   20:
+        -:   21:#define TESTCARD "Adventurer"
+        -:   22:#define MAX_TESTS 1000
+        -:   23:
+        -:   24:int main() 
+        -:   25:{
+        -:   26:	struct gameState G, testG;
+        1:   27:    int player = 0, numPlayers = 0, testIndex = 0;
+        1:   28:    int seed = 1000;
+        -:   29:    // int i = 0, adventurerInHandTestG = 0, adventurerInHandG = 0;
+        1:   30:    int handpos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0;
+        1:   31:	int k[10] = {adventurer, embargo, village, minion, mine, cutpurse,
+        -:   32:			sea_hag, tribute, smithy, council_room};
+        -:   33:
+        -:   34:
+        1:   35:	printf ("\n--------------------Start Testing Card: %s --------------------\n", TESTCARD);
+        -:   36:
+     2002:   37:	for(testIndex = 0; testIndex < MAX_TESTS; testIndex++)
+        -:   38:	{
+        -:   39:		// Randomly generate number of players. Valid number of players is 2 - 4.
+     1000:   40:		numPlayers = random() % 3 + 2;
+     1000:   41:		printf("Test# %d - Testing %d players.\n", testIndex + 1, numPlayers);
+        -:   42:		// Initialize a game state and player cards.
+     1000:   43:		initializeGame(numPlayers, k, seed, &G);
+     1000:   44:		memcpy(&testG, &G, sizeof(struct gameState));
+     1000:   45:		cardEffect(adventurer, choice1, choice2, choice3, &G, handpos, &bonus);
+     1000:   46:		player = whoseTurn(&testG);
+        -:   47:
+        -:   48:		// Test1: Player hand count should +1 after Adventurer card is played. Gain 2 Treasure card and discard Adventurer card.
+     1000:   49:		printf("Testing hand count after Adventurer is played.\n");
+        -:   50:		//int handCountDiff = G.handCount[player] - testG.handCount[player];
+     1000:   51:		if(testG.handCount[player] + 1 == G.handCount[player])
+        -:   52:		{
+    #####:   53:			printf("	TEST PASSED - hand count is correct. Current hand count = %d. Expected hand count = %d; Actual hand count = %d.\n", testG.handCount[player], testG.handCount[player] + 2 - 1, G.handCount[player]);
+    #####:   54:		}
+        -:   55:		else
+        -:   56:		{
+     1000:   57:			printf("	TEST FAILED - hand count is incorrect. Current hand count = %d. Expected hand count = %d; Actual hand count = %d.\n", testG.handCount[player], testG.handCount[player] + 2 - 1, G.handCount[player]);
+        -:   58:		}
+        -:   59:		//assert(handCountDiff == 1 && "	TEST FAILED - hand count does not match.\n");
+        -:   60:		//printf("	TEST PASSED - hand count is correct. Current hand count = %d. Expected hand count = %d; Actual hand count = %d.\n", testG.handCount[player], testG.handCount[player] + 2 - 1, G.handCount[player]);
+     1000:   61:		printf("\n");
+        -:   62:
+        -:   63:
+        -:   64:
+        -:   65:		// Test2: Player deck count should -2 since 2 Treasure card is drawn.
+     1000:   66:		printf("Testing deck count after Adventurer is played.\n");
+     1000:   67:		int deckCountDiff = testG.deckCount[player] - G.deckCount[player];
+     1000:   68:		if(testG.deckCount[player] == G.deckCount[player] + 2)
+        -:   69:		{
+    #####:   70:			printf("	TEST PASSED - deck count is correct. Deck count current = %d. Expected = %d; Actual = %d.\n", testG.deckCount[player], testG.deckCount[player] - 2, G.deckCount[player]);
+    #####:   71:		}
+        -:   72:		else
+        -:   73:		{
+     1000:   74:			printf("	TEST FAILED - deck count is correct. Deck count current = %d. Expected = %d; Actual = %d.\n", testG.deckCount[player], testG.deckCount[player] - 2, G.deckCount[player]);
+        -:   75:		}
+        -:   76:		//assert(deckCountDiff == 2 && "	TEST FAILED - deck count is not accurate.\n");
+     1000:   77:		printf("	TEST PASSED - deck count is correct. Deck count current = %d. Expected = %d; Actual = %d.\n", testG.deckCount[player], testG.deckCount[player] - 2, G.deckCount[player]);
+     1000:   78:		printf("\n");
+        -:   79:
+        -:   80:
+        -:   81:
+        -:   82:		// Test3: Check if Adventurer card is played. If so, playedCardCount should +1.
+     1000:   83:		printf("Testing played card count after Adventurer is played.\n");
+     1000:   84:		if(testG.playedCardCount == G.playedCardCount - 1)
+        -:   85:		{
+     1000:   86:			printf("	TEST PASSED - Played card count current = %d. Expected = %d; Actual = %d.\n", testG.playedCardCount, testG.playedCardCount + 1, G.playedCardCount);
+     1000:   87:		}
+        -:   88:		else
+        -:   89:		{
+    #####:   90:			printf("	TEST FAILED - Played card count current = %d. Expected = %d; Actual = %d.\n", testG.playedCardCount, testG.playedCardCount + 1, G.playedCardCount);
+        -:   91:		}
+     1000:   92:		printf("\n");
+        -:   93:
+        -:   94:
+        -:   95:
+        -:   96:		// Test4: Check if Adventurer card is discarded.
+     1000:   97:		printf("Checking if Adventurer is discarded after played.\n");
+     1000:   98:		int difference = testG.discardCount[player] - G.discardCount[player];
+        -:   99:		// switch(difference)
+        -:  100:		// {
+        -:  101:		// 	case 0:
+        -:  102:		// 		printf("	TEST PASSED - Adventurer was discarded.\n");	
+        -:  103:		// 		break;
+        -:  104:
+        -:  105:		// 	default:
+        -:  106:		// 		printf("	TEST FAILED - Adventurer was NOT discarded.\n");
+        -:  107:		// 		break;
+        -:  108:		// }
+     3000:  109:		assert(difference == 0 && "	TEST FAILED - Adventurer was NOT discarded.\n");
+     1000:  110:		printf("	TEST PASSED - Adventurer was discarded.\n");
+     1000:  111:		printf("\n");
+     1000:  112:	}
+        -:  113:
+        1:  114:	printf ("\n--------------------End Testing Card: %s --------------------\n", TESTCARD);
+        1:  115:	printf("\nTEST SUCCESSFULLY COMPLETED\n");
+        -:  116:
+        1:  117:	return 0;
+        -:  118:}
+        -:  119:

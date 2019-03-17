@@ -1,0 +1,698 @@
+
+--------------------Start Testing Card: smithy --------------------
+
+Testing 2 players.
+Testing hand count after Smithy is played.
+	TEST FAILED - hand count is incorrect. Current hand count = 5. Expected hand count = 4; Actual hand count = 8.
+
+Testing Smithy is added to player's hand.
+	TEST PASSED - Smithy card was added to the players hand.
+
+Testing card count after Smithy is played.
+	TEST PASSED - Current card count = 0. Expected card count = 2; Actual card count = 2.
+
+Checking Smithy card count after one played.
+	TEST FAILED - Smithy count before: 0; after: 0; expected after: -1.
+
+Checking if Smithy is discarded after played.
+	TEST FAILED - Smithy was NOT discarded.
+
+
+Testing 3 players.
+Testing hand count after Smithy is played.
+	TEST FAILED - hand count is incorrect. Current hand count = 5. Expected hand count = 4; Actual hand count = 8.
+
+Testing Smithy is added to player's hand.
+	TEST PASSED - Smithy card was added to the players hand.
+
+Testing card count after Smithy is played.
+	TEST PASSED - Current card count = 0. Expected card count = 2; Actual card count = 2.
+
+Checking Smithy card count after one played.
+	TEST FAILED - Smithy count before: 0; after: 0; expected after: -1.
+
+Checking if Smithy is discarded after played.
+	TEST FAILED - Smithy was NOT discarded.
+
+
+Testing 4 players.
+Testing hand count after Smithy is played.
+	TEST FAILED - hand count is incorrect. Current hand count = 5. Expected hand count = 4; Actual hand count = 8.
+
+Testing Smithy is added to player's hand.
+	TEST PASSED - Smithy card was added to the players hand.
+
+Testing card count after Smithy is played.
+	TEST PASSED - Current card count = 0. Expected card count = 2; Actual card count = 2.
+
+Checking Smithy card count after one played.
+	TEST FAILED - Smithy count before: 0; after: 0; expected after: -1.
+
+Checking if Smithy is discarded after played.
+	TEST FAILED - Smithy was NOT discarded.
+
+
+--------------------End Testing Card: smithy --------------------
+
+TEST SUCCESSFULLY COMPLETED
+
+--------------------Start Testing Card: Adventurer --------------------
+Testing hand count after Adventurer is played.
+	TEST FAILED - hand count is incorrect. Current hand count = 5. Expected hand count = 6; Actual hand count = 9.
+
+Testing deck count after Adventurer is played.
+	TEST FAILED - deck count is correct. Deck count current = 5. Expected = 3; Actual = 0.
+
+Testing played card count after Adventurer is played.
+	TEST PASSED - Played card count current = 0. Expected = 1; Actual = 1.
+
+Checking if Adventurer is discarded after played.
+	TEST PASSED - Adventurer was discarded.
+
+
+--------------------End Testing Card: Adventurer --------------------
+
+TEST SUCCESSFULLY COMPLETED
+
+--------------------Start Testing Card: Great Hall --------------------
+
+Testing 2 players.
+Testing card count after Great Hall is played.
+	TEST PASSED - played card count current = 0. Expected = 1; Actual = 1.
+
+Testing hand count after Great Hall is played.
+	TEST PASSED - hand count current = 5. Expected = 5; Actual = 5.
+
+Checking Action is added +1.
+	TEST PASSED - action count current = 1. Expected = 2; Actual = 2.
+
+Checking if Great Hall is discarded after played.
+	TEST PASSED - Great Hall was discarded.
+
+
+Testing 3 players.
+Testing card count after Great Hall is played.
+	TEST PASSED - played card count current = 0. Expected = 1; Actual = 1.
+
+Testing hand count after Great Hall is played.
+	TEST PASSED - hand count current = 5. Expected = 5; Actual = 5.
+
+Checking Action is added +1.
+	TEST PASSED - action count current = 1. Expected = 2; Actual = 2.
+
+Checking if Great Hall is discarded after played.
+	TEST PASSED - Great Hall was discarded.
+
+
+Testing 4 players.
+Testing card count after Great Hall is played.
+	TEST PASSED - played card count current = 0. Expected = 1; Actual = 1.
+
+Testing hand count after Great Hall is played.
+	TEST PASSED - hand count current = 5. Expected = 5; Actual = 5.
+
+Checking Action is added +1.
+	TEST PASSED - action count current = 1. Expected = 2; Actual = 2.
+
+Checking if Great Hall is discarded after played.
+	TEST PASSED - Great Hall was discarded.
+
+
+--------------------End Testing Card: Great Hall --------------------
+
+TEST SUCCESSFULLY COMPLETED
+
+--------------------Start Testing Card: steward --------------------
+TEST 1: Choice1 = player chooses to gain 2 cards.
+Player's current hand count = 5. deck count = 5. coins = 4
+New hand count = 6, expected = 6
+New deck count = 3, expected = 3
+New coins = 4, expected = 4
+TEST 1 PASSED.
+
+TEST 2: choice1 = player chooses to gain 2 coins
+Player's current hand count = 5. deck count = 5. coins = 4
+New hand count = 4, expected = 4
+New deck count = 5, expected = 5
+New coins = 6, expected = 6
+TEST 2 PASSED.
+
+TEST 3: choice1 = player chooses to trash 2 cards
+Starting cards: (18)(0)(7)(12)(16); Cards removed: (0)(7); Ending cards: (16)(12); Expected ending cards: (12)(16)
+Starting cards: (18)(0)(7)(12)(16); Cards removed: (0)(12); Ending cards: (7)(16); Expected ending cards: (7)(16)
+Starting cards: (18)(0)(7)(12)(16); Cards removed: (0)(16); Ending cards: (7)(12); Expected ending cards: (7)(12)
+
+Starting cards: (18)(0)(7)(12)(16); Cards removed: (7)(12); Ending cards: (16)(0); Expected ending cards: (0)(16)
+Starting cards: (18)(0)(7)(12)(16); Cards removed: (7)(16); Ending cards: (12)(0); Expected ending cards: (0)(12)
+
+Starting cards: (18)(0)(7)(12)(16); Cards removed: (12)(16); Ending cards: (7)(0); Expected ending cards: (0)(7)
+
+
+TEST 3 PASSED.
+
+
+--------------------End Testing Card: steward --------------------
+
+TEST SUCCESSFULLY COMPLETED
+
+--------------------Start Testing updateCoins()--------------------
+Test player 1 with 5 copper treasure card(s) and -1 bonus.
+Copper G.coins = 4, expected = N/A because bonus cannot be negative
+TEST FAILED - Bonus cannot be negative
+Test player 1 with 1 treasure card(s) and 0 bonus.
+Copper G.coins = 1, expected = 1
+Silver G.coins = 2, expected = 2
+Gold G.coins = 3, expected = 3
+Test player 1 with 1 treasure card(s) and 1 bonus.
+Copper G.coins = 2, expected = 2
+Silver G.coins = 3, expected = 3
+Gold G.coins = 4, expected = 4
+Test player 1 with 1 treasure card(s) and 2 bonus.
+Copper G.coins = 3, expected = 3
+Silver G.coins = 4, expected = 4
+Gold G.coins = 5, expected = 5
+Test player 1 with 1 treasure card(s) and 3 bonus.
+Copper G.coins = 4, expected = 4
+Silver G.coins = 5, expected = 5
+Gold G.coins = 6, expected = 6
+Test player 1 with 1 treasure card(s) and 4 bonus.
+Copper G.coins = 5, expected = 5
+Silver G.coins = 6, expected = 6
+Gold G.coins = 7, expected = 7
+Test player 1 with 1 treasure card(s) and 5 bonus.
+Copper G.coins = 6, expected = 6
+Silver G.coins = 7, expected = 7
+Gold G.coins = 8, expected = 8
+Test player 1 with 1 treasure card(s) and 6 bonus.
+Copper G.coins = 7, expected = 7
+Silver G.coins = 8, expected = 8
+Gold G.coins = 9, expected = 9
+Test player 1 with 1 treasure card(s) and 7 bonus.
+Copper G.coins = 8, expected = 8
+Silver G.coins = 9, expected = 9
+Gold G.coins = 10, expected = 10
+Test player 1 with 1 treasure card(s) and 8 bonus.
+Copper G.coins = 9, expected = 9
+Silver G.coins = 10, expected = 10
+Gold G.coins = 11, expected = 11
+Test player 1 with 1 treasure card(s) and 9 bonus.
+Copper G.coins = 10, expected = 10
+Silver G.coins = 11, expected = 11
+Gold G.coins = 12, expected = 12
+Test player 1 with 1 treasure card(s) and 10 bonus.
+Copper G.coins = 11, expected = 11
+Silver G.coins = 12, expected = 12
+Gold G.coins = 13, expected = 13
+Test player 1 with 2 treasure card(s) and 0 bonus.
+Copper G.coins = 2, expected = 2
+Silver G.coins = 4, expected = 4
+Gold G.coins = 6, expected = 6
+Test player 1 with 2 treasure card(s) and 1 bonus.
+Copper G.coins = 3, expected = 3
+Silver G.coins = 5, expected = 5
+Gold G.coins = 7, expected = 7
+Test player 1 with 2 treasure card(s) and 2 bonus.
+Copper G.coins = 4, expected = 4
+Silver G.coins = 6, expected = 6
+Gold G.coins = 8, expected = 8
+Test player 1 with 2 treasure card(s) and 3 bonus.
+Copper G.coins = 5, expected = 5
+Silver G.coins = 7, expected = 7
+Gold G.coins = 9, expected = 9
+Test player 1 with 2 treasure card(s) and 4 bonus.
+Copper G.coins = 6, expected = 6
+Silver G.coins = 8, expected = 8
+Gold G.coins = 10, expected = 10
+Test player 1 with 2 treasure card(s) and 5 bonus.
+Copper G.coins = 7, expected = 7
+Silver G.coins = 9, expected = 9
+Gold G.coins = 11, expected = 11
+Test player 1 with 2 treasure card(s) and 6 bonus.
+Copper G.coins = 8, expected = 8
+Silver G.coins = 10, expected = 10
+Gold G.coins = 12, expected = 12
+Test player 1 with 2 treasure card(s) and 7 bonus.
+Copper G.coins = 9, expected = 9
+Silver G.coins = 11, expected = 11
+Gold G.coins = 13, expected = 13
+Test player 1 with 2 treasure card(s) and 8 bonus.
+Copper G.coins = 10, expected = 10
+Silver G.coins = 12, expected = 12
+Gold G.coins = 14, expected = 14
+Test player 1 with 2 treasure card(s) and 9 bonus.
+Copper G.coins = 11, expected = 11
+Silver G.coins = 13, expected = 13
+Gold G.coins = 15, expected = 15
+Test player 1 with 2 treasure card(s) and 10 bonus.
+Copper G.coins = 12, expected = 12
+Silver G.coins = 14, expected = 14
+Gold G.coins = 16, expected = 16
+Test player 1 with 3 treasure card(s) and 0 bonus.
+Copper G.coins = 3, expected = 3
+Silver G.coins = 6, expected = 6
+Gold G.coins = 9, expected = 9
+Test player 1 with 3 treasure card(s) and 1 bonus.
+Copper G.coins = 4, expected = 4
+Silver G.coins = 7, expected = 7
+Gold G.coins = 10, expected = 10
+Test player 1 with 3 treasure card(s) and 2 bonus.
+Copper G.coins = 5, expected = 5
+Silver G.coins = 8, expected = 8
+Gold G.coins = 11, expected = 11
+Test player 1 with 3 treasure card(s) and 3 bonus.
+Copper G.coins = 6, expected = 6
+Silver G.coins = 9, expected = 9
+Gold G.coins = 12, expected = 12
+Test player 1 with 3 treasure card(s) and 4 bonus.
+Copper G.coins = 7, expected = 7
+Silver G.coins = 10, expected = 10
+Gold G.coins = 13, expected = 13
+Test player 1 with 3 treasure card(s) and 5 bonus.
+Copper G.coins = 8, expected = 8
+Silver G.coins = 11, expected = 11
+Gold G.coins = 14, expected = 14
+Test player 1 with 3 treasure card(s) and 6 bonus.
+Copper G.coins = 9, expected = 9
+Silver G.coins = 12, expected = 12
+Gold G.coins = 15, expected = 15
+Test player 1 with 3 treasure card(s) and 7 bonus.
+Copper G.coins = 10, expected = 10
+Silver G.coins = 13, expected = 13
+Gold G.coins = 16, expected = 16
+Test player 1 with 3 treasure card(s) and 8 bonus.
+Copper G.coins = 11, expected = 11
+Silver G.coins = 14, expected = 14
+Gold G.coins = 17, expected = 17
+Test player 1 with 3 treasure card(s) and 9 bonus.
+Copper G.coins = 12, expected = 12
+Silver G.coins = 15, expected = 15
+Gold G.coins = 18, expected = 18
+Test player 1 with 3 treasure card(s) and 10 bonus.
+Copper G.coins = 13, expected = 13
+Silver G.coins = 16, expected = 16
+Gold G.coins = 19, expected = 19
+Test player 1 with 4 treasure card(s) and 0 bonus.
+Copper G.coins = 4, expected = 4
+Silver G.coins = 8, expected = 8
+Gold G.coins = 12, expected = 12
+Test player 1 with 4 treasure card(s) and 1 bonus.
+Copper G.coins = 5, expected = 5
+Silver G.coins = 9, expected = 9
+Gold G.coins = 13, expected = 13
+Test player 1 with 4 treasure card(s) and 2 bonus.
+Copper G.coins = 6, expected = 6
+Silver G.coins = 10, expected = 10
+Gold G.coins = 14, expected = 14
+Test player 1 with 4 treasure card(s) and 3 bonus.
+Copper G.coins = 7, expected = 7
+Silver G.coins = 11, expected = 11
+Gold G.coins = 15, expected = 15
+Test player 1 with 4 treasure card(s) and 4 bonus.
+Copper G.coins = 8, expected = 8
+Silver G.coins = 12, expected = 12
+Gold G.coins = 16, expected = 16
+Test player 1 with 4 treasure card(s) and 5 bonus.
+Copper G.coins = 9, expected = 9
+Silver G.coins = 13, expected = 13
+Gold G.coins = 17, expected = 17
+Test player 1 with 4 treasure card(s) and 6 bonus.
+Copper G.coins = 10, expected = 10
+Silver G.coins = 14, expected = 14
+Gold G.coins = 18, expected = 18
+Test player 1 with 4 treasure card(s) and 7 bonus.
+Copper G.coins = 11, expected = 11
+Silver G.coins = 15, expected = 15
+Gold G.coins = 19, expected = 19
+Test player 1 with 4 treasure card(s) and 8 bonus.
+Copper G.coins = 12, expected = 12
+Silver G.coins = 16, expected = 16
+Gold G.coins = 20, expected = 20
+Test player 1 with 4 treasure card(s) and 9 bonus.
+Copper G.coins = 13, expected = 13
+Silver G.coins = 17, expected = 17
+Gold G.coins = 21, expected = 21
+Test player 1 with 4 treasure card(s) and 10 bonus.
+Copper G.coins = 14, expected = 14
+Silver G.coins = 18, expected = 18
+Gold G.coins = 22, expected = 22
+Test player 1 with 5 treasure card(s) and 0 bonus.
+Copper G.coins = 5, expected = 5
+Silver G.coins = 10, expected = 10
+Gold G.coins = 15, expected = 15
+Test player 1 with 5 treasure card(s) and 1 bonus.
+Copper G.coins = 6, expected = 6
+Silver G.coins = 11, expected = 11
+Gold G.coins = 16, expected = 16
+Test player 1 with 5 treasure card(s) and 2 bonus.
+Copper G.coins = 7, expected = 7
+Silver G.coins = 12, expected = 12
+Gold G.coins = 17, expected = 17
+Test player 1 with 5 treasure card(s) and 3 bonus.
+Copper G.coins = 8, expected = 8
+Silver G.coins = 13, expected = 13
+Gold G.coins = 18, expected = 18
+Test player 1 with 5 treasure card(s) and 4 bonus.
+Copper G.coins = 9, expected = 9
+Silver G.coins = 14, expected = 14
+Gold G.coins = 19, expected = 19
+Test player 1 with 5 treasure card(s) and 5 bonus.
+Copper G.coins = 10, expected = 10
+Silver G.coins = 15, expected = 15
+Gold G.coins = 20, expected = 20
+Test player 1 with 5 treasure card(s) and 6 bonus.
+Copper G.coins = 11, expected = 11
+Silver G.coins = 16, expected = 16
+Gold G.coins = 21, expected = 21
+Test player 1 with 5 treasure card(s) and 7 bonus.
+Copper G.coins = 12, expected = 12
+Silver G.coins = 17, expected = 17
+Gold G.coins = 22, expected = 22
+Test player 1 with 5 treasure card(s) and 8 bonus.
+Copper G.coins = 13, expected = 13
+Silver G.coins = 18, expected = 18
+Gold G.coins = 23, expected = 23
+Test player 1 with 5 treasure card(s) and 9 bonus.
+Copper G.coins = 14, expected = 14
+Silver G.coins = 19, expected = 19
+Gold G.coins = 24, expected = 24
+Test player 1 with 5 treasure card(s) and 10 bonus.
+Copper G.coins = 15, expected = 15
+Silver G.coins = 20, expected = 20
+Gold G.coins = 25, expected = 25
+Test player 2 with 1 treasure card(s) and 0 bonus.
+Copper G.coins = 1, expected = 1
+Silver G.coins = 2, expected = 2
+Gold G.coins = 3, expected = 3
+Test player 2 with 1 treasure card(s) and 1 bonus.
+Copper G.coins = 2, expected = 2
+Silver G.coins = 3, expected = 3
+Gold G.coins = 4, expected = 4
+Test player 2 with 1 treasure card(s) and 2 bonus.
+Copper G.coins = 3, expected = 3
+Silver G.coins = 4, expected = 4
+Gold G.coins = 5, expected = 5
+Test player 2 with 1 treasure card(s) and 3 bonus.
+Copper G.coins = 4, expected = 4
+Silver G.coins = 5, expected = 5
+Gold G.coins = 6, expected = 6
+Test player 2 with 1 treasure card(s) and 4 bonus.
+Copper G.coins = 5, expected = 5
+Silver G.coins = 6, expected = 6
+Gold G.coins = 7, expected = 7
+Test player 2 with 1 treasure card(s) and 5 bonus.
+Copper G.coins = 6, expected = 6
+Silver G.coins = 7, expected = 7
+Gold G.coins = 8, expected = 8
+Test player 2 with 1 treasure card(s) and 6 bonus.
+Copper G.coins = 7, expected = 7
+Silver G.coins = 8, expected = 8
+Gold G.coins = 9, expected = 9
+Test player 2 with 1 treasure card(s) and 7 bonus.
+Copper G.coins = 8, expected = 8
+Silver G.coins = 9, expected = 9
+Gold G.coins = 10, expected = 10
+Test player 2 with 1 treasure card(s) and 8 bonus.
+Copper G.coins = 9, expected = 9
+Silver G.coins = 10, expected = 10
+Gold G.coins = 11, expected = 11
+Test player 2 with 1 treasure card(s) and 9 bonus.
+Copper G.coins = 10, expected = 10
+Silver G.coins = 11, expected = 11
+Gold G.coins = 12, expected = 12
+Test player 2 with 1 treasure card(s) and 10 bonus.
+Copper G.coins = 11, expected = 11
+Silver G.coins = 12, expected = 12
+Gold G.coins = 13, expected = 13
+Test player 2 with 2 treasure card(s) and 0 bonus.
+Copper G.coins = 2, expected = 2
+Silver G.coins = 4, expected = 4
+Gold G.coins = 6, expected = 6
+Test player 2 with 2 treasure card(s) and 1 bonus.
+Copper G.coins = 3, expected = 3
+Silver G.coins = 5, expected = 5
+Gold G.coins = 7, expected = 7
+Test player 2 with 2 treasure card(s) and 2 bonus.
+Copper G.coins = 4, expected = 4
+Silver G.coins = 6, expected = 6
+Gold G.coins = 8, expected = 8
+Test player 2 with 2 treasure card(s) and 3 bonus.
+Copper G.coins = 5, expected = 5
+Silver G.coins = 7, expected = 7
+Gold G.coins = 9, expected = 9
+Test player 2 with 2 treasure card(s) and 4 bonus.
+Copper G.coins = 6, expected = 6
+Silver G.coins = 8, expected = 8
+Gold G.coins = 10, expected = 10
+Test player 2 with 2 treasure card(s) and 5 bonus.
+Copper G.coins = 7, expected = 7
+Silver G.coins = 9, expected = 9
+Gold G.coins = 11, expected = 11
+Test player 2 with 2 treasure card(s) and 6 bonus.
+Copper G.coins = 8, expected = 8
+Silver G.coins = 10, expected = 10
+Gold G.coins = 12, expected = 12
+Test player 2 with 2 treasure card(s) and 7 bonus.
+Copper G.coins = 9, expected = 9
+Silver G.coins = 11, expected = 11
+Gold G.coins = 13, expected = 13
+Test player 2 with 2 treasure card(s) and 8 bonus.
+Copper G.coins = 10, expected = 10
+Silver G.coins = 12, expected = 12
+Gold G.coins = 14, expected = 14
+Test player 2 with 2 treasure card(s) and 9 bonus.
+Copper G.coins = 11, expected = 11
+Silver G.coins = 13, expected = 13
+Gold G.coins = 15, expected = 15
+Test player 2 with 2 treasure card(s) and 10 bonus.
+Copper G.coins = 12, expected = 12
+Silver G.coins = 14, expected = 14
+Gold G.coins = 16, expected = 16
+Test player 2 with 3 treasure card(s) and 0 bonus.
+Copper G.coins = 3, expected = 3
+Silver G.coins = 6, expected = 6
+Gold G.coins = 9, expected = 9
+Test player 2 with 3 treasure card(s) and 1 bonus.
+Copper G.coins = 4, expected = 4
+Silver G.coins = 7, expected = 7
+Gold G.coins = 10, expected = 10
+Test player 2 with 3 treasure card(s) and 2 bonus.
+Copper G.coins = 5, expected = 5
+Silver G.coins = 8, expected = 8
+Gold G.coins = 11, expected = 11
+Test player 2 with 3 treasure card(s) and 3 bonus.
+Copper G.coins = 6, expected = 6
+Silver G.coins = 9, expected = 9
+Gold G.coins = 12, expected = 12
+Test player 2 with 3 treasure card(s) and 4 bonus.
+Copper G.coins = 7, expected = 7
+Silver G.coins = 10, expected = 10
+Gold G.coins = 13, expected = 13
+Test player 2 with 3 treasure card(s) and 5 bonus.
+Copper G.coins = 8, expected = 8
+Silver G.coins = 11, expected = 11
+Gold G.coins = 14, expected = 14
+Test player 2 with 3 treasure card(s) and 6 bonus.
+Copper G.coins = 9, expected = 9
+Silver G.coins = 12, expected = 12
+Gold G.coins = 15, expected = 15
+Test player 2 with 3 treasure card(s) and 7 bonus.
+Copper G.coins = 10, expected = 10
+Silver G.coins = 13, expected = 13
+Gold G.coins = 16, expected = 16
+Test player 2 with 3 treasure card(s) and 8 bonus.
+Copper G.coins = 11, expected = 11
+Silver G.coins = 14, expected = 14
+Gold G.coins = 17, expected = 17
+Test player 2 with 3 treasure card(s) and 9 bonus.
+Copper G.coins = 12, expected = 12
+Silver G.coins = 15, expected = 15
+Gold G.coins = 18, expected = 18
+Test player 2 with 3 treasure card(s) and 10 bonus.
+Copper G.coins = 13, expected = 13
+Silver G.coins = 16, expected = 16
+Gold G.coins = 19, expected = 19
+Test player 2 with 4 treasure card(s) and 0 bonus.
+Copper G.coins = 4, expected = 4
+Silver G.coins = 8, expected = 8
+Gold G.coins = 12, expected = 12
+Test player 2 with 4 treasure card(s) and 1 bonus.
+Copper G.coins = 5, expected = 5
+Silver G.coins = 9, expected = 9
+Gold G.coins = 13, expected = 13
+Test player 2 with 4 treasure card(s) and 2 bonus.
+Copper G.coins = 6, expected = 6
+Silver G.coins = 10, expected = 10
+Gold G.coins = 14, expected = 14
+Test player 2 with 4 treasure card(s) and 3 bonus.
+Copper G.coins = 7, expected = 7
+Silver G.coins = 11, expected = 11
+Gold G.coins = 15, expected = 15
+Test player 2 with 4 treasure card(s) and 4 bonus.
+Copper G.coins = 8, expected = 8
+Silver G.coins = 12, expected = 12
+Gold G.coins = 16, expected = 16
+Test player 2 with 4 treasure card(s) and 5 bonus.
+Copper G.coins = 9, expected = 9
+Silver G.coins = 13, expected = 13
+Gold G.coins = 17, expected = 17
+Test player 2 with 4 treasure card(s) and 6 bonus.
+Copper G.coins = 10, expected = 10
+Silver G.coins = 14, expected = 14
+Gold G.coins = 18, expected = 18
+Test player 2 with 4 treasure card(s) and 7 bonus.
+Copper G.coins = 11, expected = 11
+Silver G.coins = 15, expected = 15
+Gold G.coins = 19, expected = 19
+Test player 2 with 4 treasure card(s) and 8 bonus.
+Copper G.coins = 12, expected = 12
+Silver G.coins = 16, expected = 16
+Gold G.coins = 20, expected = 20
+Test player 2 with 4 treasure card(s) and 9 bonus.
+Copper G.coins = 13, expected = 13
+Silver G.coins = 17, expected = 17
+Gold G.coins = 21, expected = 21
+Test player 2 with 4 treasure card(s) and 10 bonus.
+Copper G.coins = 14, expected = 14
+Silver G.coins = 18, expected = 18
+Gold G.coins = 22, expected = 22
+Test player 2 with 5 treasure card(s) and 0 bonus.
+Copper G.coins = 5, expected = 5
+Silver G.coins = 10, expected = 10
+Gold G.coins = 15, expected = 15
+Test player 2 with 5 treasure card(s) and 1 bonus.
+Copper G.coins = 6, expected = 6
+Silver G.coins = 11, expected = 11
+Gold G.coins = 16, expected = 16
+Test player 2 with 5 treasure card(s) and 2 bonus.
+Copper G.coins = 7, expected = 7
+Silver G.coins = 12, expected = 12
+Gold G.coins = 17, expected = 17
+Test player 2 with 5 treasure card(s) and 3 bonus.
+Copper G.coins = 8, expected = 8
+Silver G.coins = 13, expected = 13
+Gold G.coins = 18, expected = 18
+Test player 2 with 5 treasure card(s) and 4 bonus.
+Copper G.coins = 9, expected = 9
+Silver G.coins = 14, expected = 14
+Gold G.coins = 19, expected = 19
+Test player 2 with 5 treasure card(s) and 5 bonus.
+Copper G.coins = 10, expected = 10
+Silver G.coins = 15, expected = 15
+Gold G.coins = 20, expected = 20
+Test player 2 with 5 treasure card(s) and 6 bonus.
+Copper G.coins = 11, expected = 11
+Silver G.coins = 16, expected = 16
+Gold G.coins = 21, expected = 21
+Test player 2 with 5 treasure card(s) and 7 bonus.
+Copper G.coins = 12, expected = 12
+Silver G.coins = 17, expected = 17
+Gold G.coins = 22, expected = 22
+Test player 2 with 5 treasure card(s) and 8 bonus.
+Copper G.coins = 13, expected = 13
+Silver G.coins = 18, expected = 18
+Gold G.coins = 23, expected = 23
+Test player 2 with 5 treasure card(s) and 9 bonus.
+Copper G.coins = 14, expected = 14
+Silver G.coins = 19, expected = 19
+Gold G.coins = 24, expected = 24
+Test player 2 with 5 treasure card(s) and 10 bonus.
+Copper G.coins = 15, expected = 15
+Silver G.coins = 20, expected = 20
+Gold G.coins = 25, expected = 25
+
+TEST SUCCESSFULLY COMPLETED
+
+--------------------End Testing updateCoins()--------------------
+
+--------------------Start Testing getCost()--------------------
+Cost for card duchy = 5, expected card cost = 5
+Cost for card province = 8, expected card cost = 8
+Cost for card copper = 0, expected card cost = 0
+Cost for card silver = 3, expected card cost = 3
+Cost for card gold = 6, expected card cost = 6
+Cost for card adventurer = 6, expected card cost = 6
+Cost for card council_room = 5, expected card cost = 5
+Cost for card feast = 4, expected card cost = 4
+Cost for card gardens = 4, expected card cost = 4
+Cost for card mine = 5, expected card cost = 5
+Cost for card remodel = 4, expected card cost = 4
+Cost for card smithy = 4, expected card cost = 4
+Cost for card village = 3, expected card cost = 3
+Cost for card baron = 4, expected card cost = 4
+Cost for card great_hall = 3, expected card cost = 3
+Cost for card minion = 5, expected card cost = 5
+Cost for card steward = 3, expected card cost = 3
+Cost for card tribute = 5, expected card cost = 5
+Cost for card ambassador = 3, expected card cost = 3
+Cost for card cutpurse = 4, expected card cost = 4
+Cost for card embargo = 2, expected card cost = 2
+Cost for card outpost = 5, expected card cost = 5
+Cost for card salvager = 4, expected card cost = 4
+Cost for card sea_hag = 4, expected card cost = 4
+TEST SUCCESSFULLY COMPLETED
+--------------------End Testing getCost()--------------------
+
+--------------------Start Testing initializeGame()--------------------
+Game should NOT start with -1 players.
+Game should NOT start with 0 players.
+Game should NOT start with 1 players.
+Game should start successfully with 2 players.
+Game should start successfully with 3 players.
+Game should start successfully with 4 players.
+Game should NOT start with 5 players.
+Game should NOT start with 6 players.
+Game should NOT start with 7 players.
+Game should NOT start with 8 players.
+Game should NOT start with 9 players.
+TEST SUCCESSFULLY COMPLETED
+--------------------End Testing initializeGame()--------------------
+
+--------------------Start Testing buyCard()--------------------
+
+Testing able to buy card.
+TEST FAILED.
+
+Testing insufficient number of buys.
+PASSED: testing coins = 10, buys = 0, supply = 1
+
+Testing insufficient number of card left.
+PASSED: testing coins = 10, buys = 0, supply = 0
+
+Testing insufficient coins.
+PASSED: testing coins = 0, buys = 1, supply = 1
+TEST SUCCESSFULLY COMPLETED
+--------------------End Testing buyCard()--------------------
+
+--------------------TEST COVERAGE--------------------
+File 'cardtest1.c'
+Lines executed:80.33% of 61
+cardtest1.c:creating 'cardtest1.c.gcov'
+
+File 'cardtest2.c'
+Lines executed:81.58% of 38
+cardtest2.c:creating 'cardtest2.c.gcov'
+
+File 'cardtest3.c'
+Lines executed:87.80% of 41
+cardtest3.c:creating 'cardtest3.c.gcov'
+
+File 'cardtest4.c'
+Lines executed:100.00% of 82
+cardtest4.c:creating 'cardtest4.c.gcov'
+
+File 'unittest1.c'
+Lines executed:97.92% of 48
+unittest1.c:creating 'unittest1.c.gcov'
+
+File 'unittest2.c'
+Lines executed:100.00% of 67
+unittest2.c:creating 'unittest2.c.gcov'
+
+File 'unittest3.c'
+Lines executed:100.00% of 17
+unittest3.c:creating 'unittest3.c.gcov'
+
+File 'unittest4.c'
+Lines executed:86.67% of 30
+unittest4.c:creating 'unittest4.c.gcov'
+

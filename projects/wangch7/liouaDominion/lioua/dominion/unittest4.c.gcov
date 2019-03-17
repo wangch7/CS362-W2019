@@ -1,0 +1,99 @@
+        -:    0:Source:unittest4.c
+        -:    0:Graph:unittest4.gcno
+        -:    0:Data:unittest4.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/************************************************************************************
+        -:    2:** unittest4.c
+        -:    3:** This unit test is designed to test buyCard function.
+        -:    4:**
+        -:    5:** Include the following lines in makefile:
+        -:    6:** unittest4: unittest4.c dominion.o rngs.o
+        -:    7:**      gcc -o unittest4 -g  unittest4.c dominion.o rngs.o $(CFLAGS)
+        -:    8:*************************************************************************************/
+        -:    9:
+        -:   10:#include "dominion.h"
+        -:   11:#include "dominion_helpers.h"
+        -:   12:#include <string.h>
+        -:   13:#include <stdio.h>
+        -:   14:#include <stdlib.h>
+        -:   15:#include <assert.h>
+        -:   16:#include <math.h>
+        -:   17:#include "rngs.h"
+        -:   18:
+        -:   19:
+        -:   20:
+        -:   21:int main() 
+        -:   22:{	
+        -:   23:	struct gameState state1;
+        -:   24:    struct gameState state2;
+        -:   25:    struct gameState state3;
+        -:   26:    struct gameState state4;
+        1:   27:    int supplyPos1 = 1;
+        1:   28:    int supplyPos2 = 0;
+        -:   29:
+        -:   30:
+        1:   31:    printf ("\n--------------------Start Testing buyCard()--------------------\n");
+        -:   32:
+        -:   33:    // state1 - able to buy.
+        1:   34:    state1.numBuys = 1;
+        1:   35:    state1.coins = 12;
+        -:   36:
+        -:   37:    // state2 - unable to buy due to insufficient number of buys left.
+        1:   38:    state2.numBuys = 0;
+        1:   39:    state2.coins = 10;
+        -:   40:
+        -:   41:    // state3 - unable to buy because lacking that type of cards.
+        1:   42:    state3.numBuys = 0;
+        1:   43:    state3.coins = 10;
+        -:   44:
+        -:   45:
+        -:   46:    // state4 - unable to buy because not enough coins.
+        1:   47:    state4.numBuys = 1;
+        1:   48:    state4.coins = 0;
+        -:   49:
+        -:   50:
+        -:   51:
+        1:   52:    printf("\nTesting able to buy card.\n");
+        1:   53:    if(buyCard(supplyPos1, &state1) == 0)
+    #####:   54:        printf("PASSED: testing coins = %d, buys = %d, supply = %d\n", state1.coins, state1.numBuys, supplyPos1);
+        -:   55:    else
+        1:   56:        printf("TEST FAILED.\n");
+        -:   57:
+        -:   58:
+        -:   59:
+        1:   60:    printf("\nTesting insufficient number of buys.\n");
+        1:   61:    if(buyCard(supplyPos1, &state2) == -1)
+        1:   62:        printf("PASSED: testing coins = %d, buys = %d, supply = %d\n", state2.coins, state2.numBuys, supplyPos1);
+        -:   63:    else
+    #####:   64:        printf("TEST FAILED.\n");
+        -:   65:
+        -:   66:
+        -:   67:
+        1:   68:    printf("\nTesting insufficient number of card left.\n");
+        1:   69:    if(buyCard(supplyPos2, &state3) == -1)
+        1:   70:        printf("PASSED: testing coins = %d, buys = %d, supply = %d\n", state3.coins, state3.numBuys, supplyPos2);
+        -:   71:    else
+    #####:   72:        printf("TEST FAILED.\n");
+        -:   73:        
+        -:   74:
+        -:   75:
+        1:   76:    printf("\nTesting insufficient coins.\n");
+        1:   77:    if(buyCard(supplyPos1, &state4) == -1)
+        1:   78:        printf("PASSED: testing coins = %d, buys = %d, supply = %d\n", state4.coins, state4.numBuys, supplyPos1);
+        -:   79:    else
+    #####:   80:        printf("TEST FAILED.\n");
+        -:   81:
+        -:   82:
+        -:   83:
+        -:   84:	
+        1:   85:	printf("TEST SUCCESSFULLY COMPLETED");
+        1:   86:	printf ("\n--------------------End Testing buyCard()--------------------\n");
+        -:   87:
+        1:   88:	return 0;
+        -:   89:}
+        -:   90:
+        -:   91:
+        -:   92:
+        -:   93:
+        -:   94:

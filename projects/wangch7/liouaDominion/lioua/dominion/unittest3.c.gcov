@@ -1,0 +1,63 @@
+        -:    0:Source:unittest3.c
+        -:    0:Graph:unittest3.gcno
+        -:    0:Data:unittest3.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/************************************************************************************
+        -:    2:** unittest3.c
+        -:    3:** This unit test is designed to test initializeGame function.
+        -:    4:**
+        -:    5:** Include the following lines in makefile:
+        -:    6:** unittest3: unittest3.c dominion.o rngs.o
+        -:    7:**      gcc -o unittest3 -g  unittest3.c dominion.o rngs.o $(CFLAGS)
+        -:    8:*************************************************************************************/
+        -:    9:
+        -:   10:#include "dominion.h"
+        -:   11:#include "dominion_helpers.h"
+        -:   12:#include <string.h>
+        -:   13:#include <stdio.h>
+        -:   14:#include <stdlib.h>
+        -:   15:#include <assert.h>
+        -:   16:#include "rngs.h"
+        -:   17:
+        -:   18:
+        -:   19:
+        -:   20:int main() 
+        -:   21:{	
+        -:   22:	struct gameState G;
+        1:   23:	int seed = 1000;
+        1:   24:	int k[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse, 
+        -:   25:	       		sea_hag, tribute, smithy};
+        -:   26:	int initGame;
+        1:   27:	int numPlayer = 0;
+        -:   28:
+        -:   29:
+        1:   30:    printf ("\n--------------------Start Testing initializeGame()--------------------\n");
+        -:   31:
+        -:   32:    // When the number of players is valid 2 - 4 inclusive, the game should start normally.
+       24:   33:    for(numPlayer = -1; numPlayer < 10; numPlayer++)
+        -:   34:    {
+       19:   35:    	if(numPlayer < 2 || numPlayer > 4)
+        -:   36:    	{
+        8:   37:    		printf("Game should NOT start with %d players.\n", numPlayer);
+        8:   38:    		initGame = initializeGame(numPlayer, k, seed, &G);
+       16:   39:    		assert(initGame == -1);
+        8:   40:    	}
+        -:   41:    	else
+        -:   42:    	{
+        3:   43:    		printf("Game should start successfully with %d players.\n", numPlayer);
+        3:   44:    		initGame = initializeGame(numPlayer, k, seed, &G);
+        6:   45:    		assert(initGame == 0);
+        -:   46:    	}
+       11:   47:    }
+        -:   48:	
+        1:   49:	printf("TEST SUCCESSFULLY COMPLETED");
+        1:   50:	printf ("\n--------------------End Testing initializeGame()--------------------\n");
+        -:   51:
+        1:   52:	return 0;
+        -:   53:}
+        -:   54:
+        -:   55:
+        -:   56:
+        -:   57:
+        -:   58:

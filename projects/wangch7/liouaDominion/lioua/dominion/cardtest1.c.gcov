@@ -1,0 +1,142 @@
+        -:    0:Source:cardtest1.c
+        -:    0:Graph:cardtest1.gcno
+        -:    0:Data:cardtest1.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/************************************************************************************
+        -:    2:** cardtest1.c
+        -:    3:** This card test is designed to test card Smithy.
+        -:    4:** Smithy - add three cards.
+        -:    5:**
+        -:    6:** Include the following lines in makefile:
+        -:    7:** cardtest1: cardtest1.c dominion.o rngs.o
+        -:    8:**      gcc -o cardtest1 -g  cardtest1.c dominion.o rngs.o $(CFLAGS)
+        -:    9:*************************************************************************************/
+        -:   10:
+        -:   11:#include "dominion.h"
+        -:   12:#include "dominion_helpers.h"
+        -:   13:#include <string.h>
+        -:   14:#include <stdio.h>
+        -:   15:#include <assert.h>
+        -:   16:#include "rngs.h"
+        -:   17:#include <stdlib.h>
+        -:   18:
+        -:   19:#define TESTCARD "smithy"
+        -:   20:
+        -:   21:int main() 
+        -:   22:{
+        -:   23:	struct gameState G, testG;
+        1:   24:    int i = 0;
+        1:   25:    int player = 0, numPlayers = 0;
+        1:   26:    int seed = 1000;
+        1:   27:    int handpos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0;
+        1:   28:    int smithyInHandG = 0, smithyInHandTestG = 0;
+        1:   29:	int k[10] = {adventurer, embargo, village, minion, mine, cutpurse,
+        -:   30:			sea_hag, tribute, smithy, council_room};
+        -:   31:
+        -:   32:
+        1:   33:	printf ("\n--------------------Start Testing Card: %s --------------------\n", TESTCARD);
+        -:   34:
+        8:   35:	for(numPlayers = 2; numPlayers < 5; numPlayers++)
+        -:   36:	{
+        3:   37:		printf ("\nTesting %d players.\n", numPlayers);
+        -:   38:		
+        -:   39:		// initialize a game state and player cards.
+        3:   40:		initializeGame(numPlayers, k, seed, &G);
+        3:   41:		memcpy(&testG, &G, sizeof(struct gameState));
+        3:   42:		cardEffect(smithy, choice1, choice2, choice3, &G, handpos, &bonus);
+        3:   43:		player = whoseTurn(&testG);
+        -:   44:
+        -:   45:		// Test1: check the player hands count after Smithy card is played.
+        3:   46:		printf("Testing hand count after Smithy is played.\n");
+        3:   47:		if(testG.handCount[player] - 1 == G.handCount[player])
+        -:   48:		{
+    #####:   49:			printf("	TEST PASSED - hand count is correct. Current hand count = %d. Expected hand count = %d; Actual hand count = %d.\n", testG.handCount[player], testG.handCount[player] - 1, G.handCount[player]);
+    #####:   50:		}
+        -:   51:		else
+        -:   52:		{
+        3:   53:			printf("	TEST FAILED - hand count is incorrect. Current hand count = %d. Expected hand count = %d; Actual hand count = %d.\n", testG.handCount[player], testG.handCount[player] - 1, G.handCount[player]);
+        -:   54:		}
+        3:   55:		printf("\n");
+        -:   56:
+        -:   57:		
+        -:   58:		// Test2: Check Smithy is added to player's hand.
+        3:   59:		printf("Testing Smithy is added to player's hand.\n");
+        3:   60:		if(G.hand[player][testG.handCount[player]] != -1)
+        -:   61:		{
+        3:   62:			printf("	TEST PASSED - Smithy card was added to the players hand.\n");
+        3:   63:		}
+        -:   64:		else
+        -:   65:		{
+    #####:   66:			printf("	TEST FAILED - Smithy card was NOT added to the players hand.\n");
+        -:   67:		}
+        3:   68:		printf("\n");
+        -:   69:
+        -:   70:		// Test3: Check if Smithy card is played - if so, player's card count will increase by 2.
+        3:   71:		printf("Testing card count after Smithy is played.\n");
+        3:   72:		if(testG.playedCardCount + 2 == G.playedCardCount)
+        -:   73:		{
+        3:   74:			printf("	TEST PASSED - Current card count = %d. Expected card count = %d; Actual card count = %d.\n", testG.playedCardCount, testG.playedCardCount + 2, G.playedCardCount);
+        3:   75:		}
+        -:   76:		else
+        -:   77:		{
+    #####:   78:			printf("	TEST FAILED - Current card count = %d. Expected card count = %d; Actual card count = %d.\n", testG.playedCardCount, testG.playedCardCount + 2, G.playedCardCount);
+        -:   79:		}
+        3:   80:		printf("\n");
+        -:   81:		
+        -:   82:		// Test4: Check Smithy card count is correct after it's played. Difference should be 1.
+        3:   83:		printf("Checking Smithy card count after one played.\n");
+        -:   84:		// Count all Smithy in hand before it's played.
+       36:   85:		for (i = 0; i < testG.handCount[0]; i++)
+        -:   86:		{
+       15:   87:	        if(testG.hand[0][i] == smithy)
+        -:   88:			{
+    #####:   89:				smithyInHandTestG++;
+    #####:   90:			}
+       15:   91:		}
+        -:   92:
+        -:   93:		// Count all Smithy in hand after it's played.
+       54:   94:		for (i = 0; i < G.handCount[0]; i++)
+        -:   95:		{
+       24:   96:	        if(G.hand[0][i] == smithy)
+        -:   97:			{
+    #####:   98:				smithyInHandG++;
+    #####:   99:			}
+       24:  100:		}
+        -:  101:
+        3:  102:		int smithyCountDiff = smithyInHandTestG - smithyInHandG;
+        3:  103:		switch(smithyCountDiff)
+        -:  104:		{
+        -:  105:			case 1:
+    #####:  106:				printf("	TEST PASSED - Smithy count before: %d; after: %d; expected after: %d.\n", smithyInHandTestG, smithyInHandG, (smithyInHandTestG - 1));
+    #####:  107:				break;
+        -:  108:			default:
+        3:  109:				printf("	TEST FAILED - Smithy count before: %d; after: %d; expected after: %d.\n", smithyInHandTestG, smithyInHandG, (smithyInHandTestG - 1));
+        3:  110:				break;
+        -:  111:		}
+        3:  112:		printf("\n");
+        -:  113:		
+        -:  114:		
+        -:  115:		// Test5: Discard Test: Check if card was discarded
+        3:  116:		printf("Checking if Smithy is discarded after played.\n");
+        3:  117:		int difference = testG.discardCount[player] - G.discardCount[player];
+        3:  118:		switch(difference)
+        -:  119:		{
+        -:  120:			case 0:
+    #####:  121:				printf("	TEST PASSED - Smithy was discarded.\n");	
+    #####:  122:				break;
+        -:  123:
+        -:  124:			default:
+        3:  125:				printf("	TEST FAILED - Smithy was NOT discarded.\n");
+        3:  126:				break;
+        -:  127:		}
+        3:  128:		printf("\n");
+        3:  129:	}
+        -:  130:
+        1:  131:	printf ("\n--------------------End Testing Card: %s --------------------\n", TESTCARD);
+        1:  132:	printf("\nTEST SUCCESSFULLY COMPLETED\n");
+        -:  133:
+        1:  134:	return 0;
+        -:  135:}
+        -:  136:
+        -:  137:

@@ -671,8 +671,8 @@ int playCardAdventurer(int drawntreasure, struct gameState *state, int currentPl
     }
     drawCard(currentPlayer, state);
     cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1];//top card of hand is most recently drawn card.
-    // if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)
-    if (cardDrawn == copper || cardDrawn == silver)
+    if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)
+    //if (cardDrawn == copper || cardDrawn == silver)
       drawntreasure++;
     else {
       temphand[z]=cardDrawn;
@@ -686,6 +686,7 @@ int playCardAdventurer(int drawntreasure, struct gameState *state, int currentPl
   }
   return 0;
 }
+
 // Village Card
 int playCardVillage(struct gameState *state, int currentPlayer, int handPos)
 {
@@ -1000,6 +1001,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
       drawCard(currentPlayer, state);
 			
       //+1 Actions
+      //state->numActions = state->numActions + 2;
       state->numActions++;
 			
       //discard card from hand
@@ -1329,10 +1331,12 @@ int discardCard(int handPos, int currentPlayer, struct gameState *state, int tra
     }
 	
   //set played card to -1
-  state->hand[currentPlayer][handPos] = -1;
+  //state->hand[currentPlayer][handPos] = -1;
+  state->hand[currentPlayer][handPos] = 0;
 	
   //remove card from player's hand
   if ( handPos == (state->handCount[currentPlayer] - 1) ) 	//last card in hand array is played
+  //if ( state->handCount[currentPlayer] == 0 )   //last card in hand array is played
     {
       //reduce number of cards in hand
       state->handCount[currentPlayer]--;

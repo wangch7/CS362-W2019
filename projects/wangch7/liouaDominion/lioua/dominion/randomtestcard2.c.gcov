@@ -1,0 +1,129 @@
+        -:    0:Source:randomtestcard2.c
+        -:    0:Graph:randomtestcard2.gcno
+        -:    0:Data:randomtestcard2.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/************************************************************************************
+        -:    2:** randomtestcard2.c
+        -:    3:** This card test is designed to test card Great Hall.
+        -:    4:** Great Hall - add 1 card and add 1 action.
+        -:    5:**
+        -:    6:** Include the following lines in makefile:
+        -:    7:** randomtestcard2: randomtestcard2.c dominion.o rngs.o
+        -:    8:**      gcc -o randomtestcard2 -g  randomtestcard2.c dominion.o rngs.o $(CFLAGS)
+        -:    9:*************************************************************************************/
+        -:   10:
+        -:   11:#include "dominion.h"
+        -:   12:#include "dominion_helpers.h"
+        -:   13:#include <string.h>
+        -:   14:#include <stdio.h>
+        -:   15:#include <assert.h>
+        -:   16:#include "rngs.h"
+        -:   17:#include <stdlib.h>
+        -:   18:#include <time.h>
+        -:   19:
+        -:   20:#define TESTCARD "Great Hall"
+        -:   21:#define MAX_TESTS 1000
+        -:   22:
+        -:   23:int main() 
+        -:   24:{
+        -:   25:	struct gameState G, testG;
+        1:   26:    int player = 0, numPlayers = 0, testIndex = 0;
+        1:   27:    int seed = 1000;
+        1:   28:    int handpos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0;
+        1:   29:	int k[10] = {adventurer, embargo, village, minion, mine, cutpurse,
+        -:   30:			sea_hag, tribute, smithy, council_room};
+        -:   31:
+        1:   32:	double time_spent = 0.0;
+        -:   33:
+        1:   34:	printf ("\n--------------------Start Testing Card: %s --------------------\n", TESTCARD);
+        -:   35:
+        1:   36:	clock_t begin = clock();
+        -:   37:
+     2002:   38:	for(testIndex = 0; testIndex < MAX_TESTS; testIndex++)
+        -:   39:	{
+        -:   40:		// Randomly generate the number of players. 2 - 4 players allowed.
+     1000:   41:		numPlayers = random() % 3 + 2;
+     1000:   42:		printf ("Test# %d - Testing %d players.\n", testIndex + 1, numPlayers);
+        -:   43:		// initialize a game state and player cards.
+     1000:   44:		initializeGame(numPlayers, k, seed, &G);
+        -:   45:		// copy game state to test state for comparison later.
+     1000:   46:		memcpy(&testG, &G, sizeof(struct gameState));
+     1000:   47:		cardEffect(great_hall, choice1, choice2, choice3, &G, handpos, &bonus);
+     1000:   48:		player = whoseTurn(&testG);
+        -:   49:
+        -:   50:		// Test1: Check if Great Hall card is played. If so, played card count should incremeted by 1.
+     1000:   51:		printf("Testing card count after Great Hall is played.\n");
+     1000:   52:		int playedCardCountDiff = G.playedCardCount - testG.playedCardCount;
+        -:   53:		// if(testG.playedCardCount == G.playedCardCount - 1)
+        -:   54:		// {
+        -:   55:		// 	printf("	TEST PASSED - played card count current = %d. Expected = %d; Actual = %d.\n", testG.playedCardCount, testG.playedCardCount + 1, G.playedCardCount);
+        -:   56:		// }
+        -:   57:		// else
+        -:   58:		// {
+        -:   59:		// 	printf("	TEST FAILED - played card count current = %d. Expected = %d; Actual = %d.\n", testG.playedCardCount, testG.playedCardCount + 1, G.playedCardCount);
+        -:   60:		// }
+     3000:   61:		assert(playedCardCountDiff == 1 && "	TEST FAILED - hand count does not match.\n");
+     1000:   62:		printf("	TEST PASSED - played card count current = %d. Expected = %d; Actual = %d.\n", testG.playedCardCount, testG.playedCardCount + 1, G.playedCardCount);
+     1000:   63:		printf("\n");
+        -:   64:
+        -:   65:		// Test2: Check if hand count after Great Hall is played. It should remain the same - discard one and gain one.
+     1000:   66:		printf("Testing hand count after Great Hall is played.\n");
+     1000:   67:		int handCountDiff = G.handCount[player] - testG.handCount[player];
+        -:   68:		// if(testG.handCount[player] == G.handCount[player] + 1 - 1)
+        -:   69:		// {
+        -:   70:		// 	printf("	TEST PASSED - hand count current = %d. Expected = %d; Actual = %d.\n", testG.handCount[player], testG.handCount[player] + 1 - 1, G.handCount[player]);
+        -:   71:		// }
+        -:   72:		// else
+        -:   73:		// {
+        -:   74:		// 	printf("	TEST FAILED - hand count current = %d. Expected = %d; Actual = %d.\n", testG.handCount[player], testG.handCount[player] + 1 - 1, G.handCount[player]);
+        -:   75:		// }
+     3000:   76:		assert(handCountDiff == 0 && "	TEST FAILED - hand count does not match.\n");
+     1000:   77:		printf("	TEST PASSED - hand count current = %d. Expected = %d; Actual = %d.\n", testG.handCount[player], testG.handCount[player] + 1 - 1, G.handCount[player]);
+     1000:   78:		printf("\n");
+        -:   79:		
+        -:   80:		// Test3: Check if Action is added by 1.
+     1000:   81:		printf("Checking Action is added +1.\n");
+     1000:   82:		int numActionDiff = G.numActions - testG.numActions;
+        -:   83:		// if(testG.numActions == G.numActions - 1)
+        -:   84:		// {
+        -:   85:		// 	printf("	TEST PASSED - action count current = %d. Expected = %d; Actual = %d.\n", testG.numActions, testG.numActions + 1, G.numActions);
+        -:   86:		// }
+        -:   87:		// else
+        -:   88:		// {
+        -:   89:		// 	printf("	TEST FAILED - action count current = %d. Expected = %d; Actual = %d.\n", testG.numActions, testG.numActions + 1, G.numActions);
+        -:   90:		// }
+     3000:   91:		assert(numActionDiff == 1 && "	TEST FAILED - action count is NOT added by 1.\n");
+     1000:   92:		printf("	TEST PASSED - action count current = %d. Expected = %d; Actual = %d.\n", testG.numActions, testG.numActions + 1, G.numActions);
+     1000:   93:		printf("\n");
+        -:   94:		
+        -:   95:		
+        -:   96:		// Test4: Discard Test: Check if Great Hall card was discarded
+     1000:   97:		printf("Checking if Great Hall is discarded after played.\n");
+     1000:   98:		int difference = testG.discardCount[player] - G.discardCount[player];
+        -:   99:		// switch(difference)
+        -:  100:		// {
+        -:  101:		// 	case 0:
+        -:  102:		// 		printf("	TEST PASSED - Great Hall was discarded.\n");	
+        -:  103:		// 		break;
+        -:  104:
+        -:  105:		// 	default:
+        -:  106:		// 		printf("	TEST FAILED - Great Hall was NOT discarded.\n");
+        -:  107:		// 		break;
+        -:  108:		// }
+     3000:  109:		assert(difference == 0 && "	TEST FAILED - Great Hall was NOT discarded.\n");
+     1000:  110:		printf("	TEST PASSED - Great Hall was discarded.\n");	
+     1000:  111:		printf("\n");
+     1000:  112:	}
+        -:  113:
+        1:  114:	printf ("\n--------------------End Testing Card: %s --------------------\n", TESTCARD);
+        1:  115:	printf("\nTEST SUCCESSFULLY COMPLETED\n");
+        -:  116:
+        1:  117:	clock_t end = clock();
+        1:  118:	time_spent += (double)(end - begin) / CLOCKS_PER_SEC;
+        1:  119:	printf("Time elpased is %f seconds.\n", time_spent);
+        -:  120:
+        1:  121:	return 0;
+        -:  122:}
+        -:  123:
+        -:  124:
